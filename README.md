@@ -73,3 +73,10 @@ kaggle 20Q noob team from three academic trashes -->
 - Gemma started notebook: https://www.kaggle.com/code/christianwittmann/llm-20-questions-starter-notebook-fully-documented
 - 如何在Kaggle环境部署LLM (video)：https://www.youtube.com/watch?v=jsCUDeg_Op4
 - 之前面试用的KnowNo的ppt：https://docs.google.com/presentation/d/180D0WsrutKRSipPYugZ3sYz2Eer1drML/edit?usp=sharing&ouid=116445889014826569768&rtpof=true&sd=true
+- 开源LLM汇总：https://www.53ai.com/news/qianyanjishu/1743.html 
+- TBC...
+
+
+
+![主要看reasoning的指标](image.png)
+<center><i><b> 主要看reasoning的指标 </b></i></center>

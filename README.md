@@ -1,5 +1,8 @@
 <!-- # Kaggle_20Q
 kaggle 20Q noob team from three academic trashes -->
+
+<a href="https://colab.research.google.com/github/tttequila/Kaggle_20Q/blob/main/LLM_Agent.ipynb" target="_parent"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
+
 ## 1. Task Description
 使用LLMs来进行经典的20 Question游戏，即通过有限问答来猜测出一个对方预先选好的secret word。每次比赛以2v2的形式进行，每队各有两个LLMs，**一个guesser LLM负责根据对方answerer LLM的回答进行提问**，**另一个answerer LLM则负责理解对方队伍的提问并回答yes或者no**。
 
@@ -78,5 +81,5 @@ kaggle 20Q noob team from three academic trashes -->
 
 
 
-![主要看reasoning的指标](image.png)
+![主要看reasoning的指标](imgs/image.png)
 <center><i><b> 主要看reasoning的指标 </b></i></center>

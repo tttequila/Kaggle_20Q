@@ -106,3 +106,4 @@ kaggle 20Q noob team from three academic trashes -->
   - [ ] 比赛需要的agent的接口
   - [ ] LLM本身的接口和部署
   - [ ] 用来包装agent的类的一些接口和需要的函数，例如answerer模式和guesser模式
+- [ ] 可以开始在服务器上比如colab什么的部署个LLM玩玩，看看怎么使用LLM

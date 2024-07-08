@@ -85,13 +85,11 @@ kaggle 20Q noob team from three academic trashes -->
 <center><i><b> 主要看reasoning的指标 </b></i></center>
 
 
-----
-
 ##### To-Do
 
 - [ ] 构建思路
   - [ ] 看看别人上传的notebook
   - [ ] 看看别的prompting based的文章
   - [ ] 看看有没有别的statistic based的为大模型衡量置信度的文章
-    - [ ] 总的思路可以是让agent每次都关于一个最能减小不确定性的
+    - [ ] 总的思路可以是让agent每次都选择一个特征来提问，这个特征需要是能够尽可能缩小备选prediction的不确定性的，例如想办法
 - [ ] 大的agent框架

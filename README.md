@@ -87,9 +87,21 @@ kaggle 20Q noob team from three academic trashes -->
 
 ##### To-Do
 
+> 总的思路是让agent每次输出都是基于一个选定好的特征来提问（某种程度上，可以类比于一个像random forest的二叉树，只不过不是一个固定好的以及预训练好的树，而是基于LLM的推理和理解和知识注入）
+>
+>     👉例如对每个keyword通过LLM提取出一些特征
+>       e.g.对于 keyword: *accent chair*，有{材质, 颜色，国家，...}
+>           然后选出能提供最大信息增益的特征，通过prompting让LLM提问
+>     👉亦或者是直接通过prompting让LLM选择他认为
+>       可以最大程度减少不确定性的特征并提问，例如使用CoT等prompting技巧     
+
 - [ ] 构建思路
   - [ ] 看看别人上传的notebook
   - [ ] 看看别的prompting based的文章
   - [ ] 看看有没有别的statistic based的为大模型衡量置信度的文章
-    - [ ] 总的思路可以是让agent每次都选择一个特征来提问，这个特征需要是能够尽可能缩小备选prediction的不确定性的，例如想办法
-- [ ] 大的agent框架
+  - [ ] 考虑上面这两个方法的可行性？
+- [ ] 总体的agent框架和比赛需要的agent格式需要搞明白
+  - [ ] 比赛需要的agent的接口
+  - [ ] LLM本身的接口和部署
+  - [ ] 用来包装agent的类的一些接口和需要的函数，例如answerer模式和guesser模式
+- [ ] 可以开始在服务器上比如colab什么的部署个LLM玩玩，看看怎么使用LLM

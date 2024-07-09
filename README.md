@@ -79,6 +79,7 @@ kaggle 20Q noob team from three academic trashes -->
 - 开源LLM汇总：https://www.53ai.com/news/qianyanjishu/1743.html
 - Gemma Document: https://ai.google.dev/gemma/docs/pytorch_gemma
 - Gemma Cookbook (more details): https://github.com/google-gemini/gemma-cookbook?tab=readme-ov-file
+- Advanced Prompting with Gemma: https://github.com/google-gemini/gemma-cookbook/blob/main/Gemma/Advanced_Prompting_Techniques.ipynb
 - TBC...
 
 
@@ -103,6 +104,7 @@ kaggle 20Q noob team from three academic trashes -->
   - [ ] 看看别的prompting based的文章
   - [ ] 看看有没有别的statistic based的为大模型衡量置信度的文章
   - [ ] 考虑上面这两个方法的可行性？
+  - [ ] 看看[高级prompt技巧](https://github.com/google-gemini/gemma-cookbook/blob/main/Gemma/Advanced_Prompting_Techniques.ipynb)
 - [ ] 总体的agent框架和比赛需要的agent格式需要搞明白
   - [ ] 比赛需要的agent的接口
   - [ ] LLM本身的接口和部署

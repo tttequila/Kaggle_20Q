@@ -52,7 +52,7 @@ kaggle 20Q noob team from three academic trashes -->
 
 <!-- </details> -->
 ---
-
+<!--
 ## 3. To-do 📝
 暂时来说，目前还在形成思路的阶段，但是有一些东西可以先去了解
 
@@ -69,14 +69,15 @@ kaggle 20Q noob team from three academic trashes -->
 - [ ] TBC...
 
 ---
-
+ -->
 
 ## Reference
 - KnowNo: https://robot-help.github.io/
 - Gemma started notebook: https://www.kaggle.com/code/christianwittmann/llm-20-questions-starter-notebook-fully-documented
 - 如何在Kaggle环境部署LLM (video)：https://www.youtube.com/watch?v=jsCUDeg_Op4
 - 之前面试用的KnowNo的ppt：https://docs.google.com/presentation/d/180D0WsrutKRSipPYugZ3sYz2Eer1drML/edit?usp=sharing&ouid=116445889014826569768&rtpof=true&sd=true
-- 开源LLM汇总：https://www.53ai.com/news/qianyanjishu/1743.html 
+- 开源LLM汇总：https://www.53ai.com/news/qianyanjishu/1743.html
+- Gemma Document: https://ai.google.dev/gemma/docs/pytorch_gemma 
 - TBC...
 
 
@@ -84,8 +85,9 @@ kaggle 20Q noob team from three academic trashes -->
 ![主要看reasoning的指标](imgs/image.png)
 <center><i><b> 主要看reasoning的指标 </b></i></center>
 
+----
 
-##### To-Do
+### To-Do
 
 > 总的思路是让agent每次输出都是基于一个选定好的特征来提问（某种程度上，可以类比于一个像random forest的二叉树，只不过不是一个固定好的以及预训练好的树，而是基于LLM的推理和理解和知识注入）
 >

@@ -77,7 +77,8 @@ kaggle 20Q noob team from three academic trashes -->
 - 如何在Kaggle环境部署LLM (video)：https://www.youtube.com/watch?v=jsCUDeg_Op4
 - 之前面试用的KnowNo的ppt：https://docs.google.com/presentation/d/180D0WsrutKRSipPYugZ3sYz2Eer1drML/edit?usp=sharing&ouid=116445889014826569768&rtpof=true&sd=true
 - 开源LLM汇总：https://www.53ai.com/news/qianyanjishu/1743.html
-- Gemma Document: https://ai.google.dev/gemma/docs/pytorch_gemma 
+- Gemma Document: https://ai.google.dev/gemma/docs/pytorch_gemma
+- Gemma Cookbook (more details): https://github.com/google-gemini/gemma-cookbook?tab=readme-ov-file
 - TBC...
 
 

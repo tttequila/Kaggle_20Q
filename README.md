@@ -30,7 +30,7 @@ kaggle 20Q noob team from three academic trashes -->
 ---
 
 ## 2. Methodology
-其实agent的任务本质上是减小下一步的熵（或者是确信度）：作为guesser时，可以是选择能最小化熵的提问方法/secrete word的特征点/etc；而作为answerer时的，这是在yes或者no当中二选一一个置信度最大的选项
+<!-- 其实agent的任务本质上是减小下一步的熵（或者是确信度）：作为guesser时，可以是选择能最小化熵的提问方法/secrete word的特征点/etc；而作为answerer时的，这是在yes或者no当中二选一一个置信度最大的选项
 
 而具体怎么实现可能有很多种方法，具体依照game env能提供的游戏信息（例如我们知不知道全部的key words词表）来确定
 > 💬
@@ -39,8 +39,6 @@ kaggle 20Q noob team from three academic trashes -->
 > - 通过一些机器学习的方法来估计一个最大化（最小化）置信度，信息增益，...的选项
 >
 
-<!-- <details>
-    <summary><b> Draft </b></summary>  -->
 
 #### 2.1. KnowNo
 
@@ -48,9 +46,16 @@ kaggle 20Q noob team from three academic trashes -->
 
 该文章本质是让robot在实际环境中能够确定有没有歧义的选项，但里面有用到一些比较好用的方法，例如使用多选问题（Multi Choice Question&Answer）来将LLM输出的token的置信度作为这个选项的置信度
 
-至于其具体能否应用进去，可能需要更多的仔细考虑
+至于其具体能否应用进去，可能需要更多的仔细考虑 -->
 
-<!-- </details> -->
+由于实际比赛中无法获取完整的keyword list，因此基本上LLM是需要具备从零开始规划的能力的，初始化可以从给出的三个categories里面做随机选择，而后面则需要开始根据已知信息进行规划
+
+- **Pure Prompting**: 直接选择比较大的模型进行部署，例如Gemma-9B，然后利用CoT的方法直接得到答案。介于回答时间只有60s，而Gemma-7B *(output_len=100)* 在colab上所需要的推理时间已经高达45s，因此我们只能使用一次prompting来直接生成答案，整不了什么花活
+- **CoT Voting**: 考虑到Gemma-2B *(output_len=100)* 的推理速度极快，只需要3s左右即可生成一次response，因此我们可以考虑使用多轮低temperature的采样来生成不同的推理路线，然后再使用投票的方法采样出一个最合适的提问方法
+- **MoE**: 同样，考虑可以利用2B模型推理迅速的优势，再辅以Mixture of Expert的方法来进行高质量且快速的生成
+- **其他**: 例如利用小的LM来得到属性的embedding，然后再通过一些数值方法得到最有区分度的问法？例如让Gemma分析出前10个最能降低不确定性的词，计算它们的embedding，然后从中选择聚类size最大的那类词进行提问
+
+
 ---
 <!--
 ## 3. To-do 📝
@@ -80,7 +85,10 @@ kaggle 20Q noob team from three academic trashes -->
 - Gemma Document: https://ai.google.dev/gemma/docs/pytorch_gemma
 - Gemma Cookbook (more details): https://github.com/google-gemini/gemma-cookbook?tab=readme-ov-file
 - Advanced Prompting with Gemma: https://github.com/google-gemini/gemma-cookbook/blob/main/Gemma/Advanced_Prompting_Techniques.ipynb
-- TBC...
+- CoT汇总: https://juejin.cn/post/7204057769493413943
+- MoE总结: https://www.53ai.com/news/qianyanjishu/1446.html
+- Prompt Engineering Guide: https://www.promptingguide.ai/zh/techniques/tot
+- CoT汇总_2: https://zhuanlan.zhihu.com/p/703881352?utm_psn=1797059515520278531
 
 
 
@@ -99,15 +107,23 @@ kaggle 20Q noob team from three academic trashes -->
 >     👉亦或者是直接通过prompting让LLM选择他认为
 >       可以最大程度减少不确定性的特征并提问，例如使用CoT等prompting技巧     
 
-- [ ] 构建思路
-  - [ ] 看看别人上传的notebook
-  - [ ] 看看别的prompting based的文章
-  - [ ] 看看有没有别的statistic based的为大模型衡量置信度的文章
-  - [ ] 考虑上面这两个方法的可行性？
+<!-- - [ ] 构建思路
+  - [x] 看看别人上传的notebook
+  - [x] 看看别的prompting based的文章
+  - [x] 看看有没有别的statistic based的为大模型衡量置信度的文章
+  - [x] 考虑上面这两个方法的可行性？
   - [ ] 看看[高级prompt技巧](https://github.com/google-gemini/gemma-cookbook/blob/main/Gemma/Advanced_Prompting_Techniques.ipynb)
 - [ ] 总体的agent框架和比赛需要的agent格式需要搞明白
   - [ ] 比赛需要的agent的接口
   - [ ] LLM本身的接口和部署
   - [ ] 用来包装agent的类的一些接口和需要的函数，例如answerer模式和guesser模式
 - [x] 可以开始在服务器上比如colab什么的部署个LLM玩玩，看看怎么使用LLM
-- [ ] 探索Gemma的用法
+- [x] 探索Gemma的用法 -->
+
+- [ ] 看MoE
+  - [ ] MoE和Voting CoT的差别是什么？
+- [ ] 看 standard CoT
+  - [ ] 写一个prototype（7B）
+- [ ] 看 voting CoT
+  - [ ] 写一个prototype（2B）
+  - [ ] 环境下可以多线程吗

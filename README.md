@@ -124,6 +124,14 @@ kaggle 20Q noob team from three academic trashes -->
   - [ ] MoE和Voting CoT的差别是什么？
 - [ ] 看 standard CoT
   - [ ] 写一个prototype（7B）
-- [ ] 看 voting CoT
+- [ ] 看 voting CoTW
   - [ ] 写一个prototype（2B）
   - [ ] 环境下可以多线程吗
+
+##### Current Work
+- [ ] 加一个kaggle和colab的初始化的切换参数
+- [ ] 写一个格式化的formatter
+- [ ] 加attribute list，然后根据attribute list自动format新的prompt
+- [ ] decay temperature / top_k / top_p
+- [ ] CoT prompt
+- [ ] voting MoE

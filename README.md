@@ -133,5 +133,42 @@ kaggle 20Q noob team from three academic trashes -->
 - [ ] 写一个格式化的formatter
 - [ ] 加attribute list，然后根据attribute list自动format新的prompt
 - [ ] decay temperature / top_k / top_p
-- [ ] CoT prompt
+- [x] CoT prompt
+  - [ ] 提交格式
 - [ ] voting MoE
+
+#### Experiment recording
+
+<details>
+        <summary><b> Single SLM with multiple CoT examples </b></summary>
+
+
+- 1 question deduction,**150** output length
+  - 72s❌, no indication of answer❌
+- 3 question deduction,**150** output length
+  - 72s❌, no indication of answer❌
+- **6** question deduction,**150** output length
+  - 83s❌, completed answer and indicator✅
+- 3 question deduction,**100** output length
+  - 52s✅, incompleted response❌
+  (maybe we can limit the length of reasoning within 100 characters)
+- **6** question deduction,**100** output length
+  - 59s✅, incompleted response❌
+
+---
+
+**👇 Try to downsize the length of the CoT example. (better few shot cases and system prompt)**
+
+---
+
+- **6** question deduction, **100** output length 
+  - 51s✅, completed and fair reasoning✅
+- **6** question deduction, **150** output length
+  - 68s❌, similar result to above✅
+
+---
+
+**👇 Apparent path dependence, maybe we need multiple deductions of different cases instead of all steps within one game**
+
+---
+</details>

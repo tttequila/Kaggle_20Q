@@ -52,9 +52,6 @@ kaggle 20Q noob team from three academic trashes -->
 
 - **Pure Prompting**: 直接选择比较大的模型进行部署，例如Gemma-9B，然后利用CoT的方法直接得到答案。介于回答时间只有60s，而Gemma-7B *(output_len=100)* 在colab上所需要的推理时间已经高达45s，因此我们只能使用一次prompting来直接生成答案，整不了什么花活
 - **CoT Voting**: 考虑到Gemma-2B *(output_len=100)* 的推理速度极快，只需要3s左右即可生成一次response，因此我们可以考虑使用多轮低temperature的采样来生成不同的推理路线，然后再使用投票的方法采样出一个最合适的提问方法
-- **MoE**: 同样，考虑可以利用2B模型推理迅速的优势，再辅以Mixture of Expert的方法来进行高质量且快速的生成
-- **其他**: 例如利用小的LM来得到属性的embedding，然后再通过一些数值方法得到最有区分度的问法？例如让Gemma分析出前10个最能降低不确定性的词，计算它们的embedding，然后从中选择聚类size最大的那类词进行提问
-
 
 ---
 <!--
@@ -77,6 +74,10 @@ kaggle 20Q noob team from three academic trashes -->
  -->
 
 ## Reference
+
+<details>
+        <summary><b> Expand </b></summary>
+
 - KnowNo: https://robot-help.github.io/
 - Gemma started notebook: https://www.kaggle.com/code/christianwittmann/llm-20-questions-starter-notebook-fully-documented
 - 如何在Kaggle环境部署LLM (video)：https://www.youtube.com/watch?v=jsCUDeg_Op4
@@ -89,7 +90,12 @@ kaggle 20Q noob team from three academic trashes -->
 - MoE总结: https://www.53ai.com/news/qianyanjishu/1446.html
 - Prompt Engineering Guide: https://www.promptingguide.ai/zh/techniques/tot
 - CoT汇总_2: https://zhuanlan.zhihu.com/p/703881352?utm_psn=1797059515520278531
+- Discussion on Kaggle
+  - Discussion from 1st in public LB: https://www.kaggle.com/competitions/llm-20-questions/discussion/518728
+  - started note of Llama-8B: https://www.kaggle.com/code/cdeotte/starter-code-for-llama-8b-llm-lb-0-750
+  - Multi-turn QA (paper): https://arxiv.org/abs/2310.01468v3
 
+</details>
 
 
 ![主要看reasoning的指标](imgs/image.png)
@@ -99,76 +105,17 @@ kaggle 20Q noob team from three academic trashes -->
 
 ### To-Do
 
-> 总的思路是让agent每次输出都是基于一个选定好的特征来提问（某种程度上，可以类比于一个像random forest的二叉树，只不过不是一个固定好的以及预训练好的树，而是基于LLM的推理和理解和知识注入）
+> ~~总的思路是让agent每次输出都是基于一个选定好的特征来提问（某种程度上，可以类比于一个像random forest的二叉树，只不过不是一个固定好的以及预训练好的树，而是基于LLM的推理和理解和知识注入~~
+> 完全通过prompt来激活模型的推理能力，基本上放弃定量分析的思路，只将思路通过CoT prompt来狠狠注入模型😡
 >
->     👉例如对每个keyword通过LLM提取出一些特征
->       e.g.对于 keyword: *accent chair*，有{材质, 颜色，国家，...}
->           然后选出能提供最大信息增益的特征，通过prompting让LLM提问
->     👉亦或者是直接通过prompting让LLM选择他认为
->       可以最大程度减少不确定性的特征并提问，例如使用CoT等prompting技巧     
-
-<!-- - [ ] 构建思路
-  - [x] 看看别人上传的notebook
-  - [x] 看看别的prompting based的文章
-  - [x] 看看有没有别的statistic based的为大模型衡量置信度的文章
-  - [x] 考虑上面这两个方法的可行性？
-  - [ ] 看看[高级prompt技巧](https://github.com/google-gemini/gemma-cookbook/blob/main/Gemma/Advanced_Prompting_Techniques.ipynb)
-- [ ] 总体的agent框架和比赛需要的agent格式需要搞明白
-  - [ ] 比赛需要的agent的接口
-  - [ ] LLM本身的接口和部署
-  - [ ] 用来包装agent的类的一些接口和需要的函数，例如answerer模式和guesser模式
-- [x] 可以开始在服务器上比如colab什么的部署个LLM玩玩，看看怎么使用LLM
-- [x] 探索Gemma的用法 -->
-
-- [ ] 看MoE
-  - [ ] MoE和Voting CoT的差别是什么？
-- [ ] 看 standard CoT
-  - [ ] 写一个prototype（7B）
-- [ ] 看 voting CoTW
-  - [ ] 写一个prototype（2B）
-  - [ ] 环境下可以多线程吗
-
-##### Current Work
-- [ ] 加一个kaggle和colab的初始化的切换参数
-- [ ] 写一个格式化的formatter
-- [ ] 加attribute list，然后根据attribute list自动format新的prompt
-- [ ] decay temperature / top_k / top_p
-- [x] CoT prompt
-  - [ ] 提交格式
-- [ ] voting MoE
-
-#### Experiment recording
-
-<details>
-        <summary><b> Single SLM with multiple CoT examples </b></summary>
+>     👉直接通过prompting让LLM选择他认为可以最大程度减少不确定性的特征并提问，例如使用CoT等prompting技巧  
 
 
-- 1 question deduction,**150** output length
-  - 72s❌, no indication of answer❌
-- 3 question deduction,**150** output length
-  - 72s❌, no indication of answer❌
-- **6** question deduction,**150** output length
-  - 83s❌, completed answer and indicator✅
-- 3 question deduction,**100** output length
-  - 52s✅, incompleted response❌
-  (maybe we can limit the length of reasoning within 100 characters)
-- **6** question deduction,**100** output length
-  - 59s✅, incompleted response❌
-
----
-
-**👇 Try to downsize the length of the CoT example. (better few shot cases and system prompt)**
-
----
-
-- **6** question deduction, **100** output length 
-  - 51s✅, completed and fair reasoning✅
-- **6** question deduction, **150** output length
-  - 68s❌, similar result to above✅
-
----
-
-**👇 Apparent path dependence, maybe we need multiple deductions of different cases instead of all steps within one game**
-
----
-</details>
+- [x] 提交格式
+- [ ] 较大模型的单次生成
+  - [x] Gemma-7B
+  - [ ] Llama-8B
+  - [ ] Gemma2-9B
+- [ ] 较小模型的多次生成
+  - [ ] 多线程同时运行3~4个2B模型最大化时间收益
+  - [ ] 通过多轮生成的多步推理来投票出最合适的下一个key attribute
